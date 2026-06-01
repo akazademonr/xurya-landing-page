@@ -3,7 +3,8 @@ import {
   Twitter, 
   Facebook, 
   Instagram, 
-  CheckCircle 
+  CheckCircle,
+  ArrowUpRight 
 } from "lucide-react";
 import Logo from "./Logo";
 
@@ -41,7 +42,7 @@ export default function Footer() {
             the use of renewable resources is very profitable for all industrial services.
           </p>
           <button className="bg-white text-black font-medium text-sm px-6 py-3 rounded-full flex items-center justify-center gap-2 hover:bg-gray-200 transition cursor-pointer w-full sm:w-fit">
-            Get in touch <span>↗</span>
+            Get in touch <ArrowUpRight size={16} />
           </button>
         </div>
 

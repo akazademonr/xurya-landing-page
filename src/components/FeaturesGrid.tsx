@@ -81,10 +81,10 @@ export default function FeaturesGrid({
 
             {/* Text */}
             <div>
-              <h3 className="text-gray-900 font-semibold text-lg mb-2">
+              <h3 className="text-gray-900 font-semibold text-lg mb-2 line-clamp-2">
                 {feature.title}
               </h3>
-              <p className="text-gray-400 text-sm leading-relaxed">
+              <p className="text-gray-400 text-sm leading-relaxed line-clamp-2">
                 {feature.description}
               </p>
             </div>
