@@ -1,11 +1,12 @@
 import Button from "./Button";
+import Logo from "./Logo";
 
 export default function Navbar() {
   return (
     <nav className="bg-white-800 text-black p-4">
       <div className="container mx-auto">
         <div className="flex justify-between items-center">
-          <div className="text-3xl font-bold font-mono" style={{ fontFamily: "Manrope, sans-serif" }}>Xurya</div>
+          <Logo />
           <div className="space-x-8 text-[17px] font-semibold font-mono" style={{ fontFamily: "Manrope, sans-serif" }}>
             <a href="#" className="hover:text-gray-300">Home</a>
             <a href="#" className="hover:text-gray-300">About Us</a>

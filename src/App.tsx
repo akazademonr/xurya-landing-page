@@ -11,6 +11,7 @@ import TestimonialCard from "./components/TestimoniesCard";
 import solarImage from "./assets/carsolar.jpg";
 import residentialImage from "./assets/housesolar.jpg";
 import windImage from "./assets/windpowerindustry.jpg";
+import Footer from "./components/Footer";
 
 const testimonials = [
   {
@@ -121,6 +122,7 @@ export default function App() {
             duration={duration}
             />
     </div>
+      <Footer />
     </div>
   )
 }
