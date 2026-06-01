@@ -53,16 +53,23 @@ export default function App() {
     <div className="bg-white text-gray-900 antialiased overflow-x-hidden w-full">
       
       {/* Header and Hero Block Wrapper */}
-      <div className="min-h-screen bg-white px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto">
+      {/* FIXED: Moved Herosection outside this wrapper and isolated padding structures to clear sub-pixel line rendering completely */}
+      <div className="bg-white px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto">
         <Navbar />
+      </div>
+
+      {/* Hero section now breathes fully on its own grid space */}
+      <div className="w-full px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto relative z-10">
         <Herosection />
+      </div>
         
-        {/* Quality Check Section */}
+      {/* Quality Check Section Wrapper */}
+      <div className="bg-white px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto relative z-20 -mt-1 md:mt-0">
         <div className="flex flex-col lg:flex-row justify-between items-center gap-8 lg:gap-16 py-16 lg:py-24 text-center lg:text-left">
           <SectionHeading
             primaryText="Focusing on quality,"
             secondaryText="we maintain customer trust"
-            size="xl" /* Leverages the custom inner fluid map safely */
+            size="xl" 
             className="max-w-xl"
           />
           <p 
@@ -74,7 +81,7 @@ export default function App() {
           </p>
         </div>
 
-        {/* Brand Logos: Removed static size strings so inner queries can breathe */}
+        {/* Brand Logos */}
         <BrandLogos />
       </div>
 
@@ -88,7 +95,6 @@ export default function App() {
         className="flex flex-col lg:flex-row gap-12 lg:gap-16 bg-white w-full px-4 sm:px-8 lg:px-16 py-16 lg:py-24 max-w-7xl mx-auto" 
         style={{ fontFamily: "Manrope, sans-serif" }}
       >
-        
         {/* Left Layout Column — text & sub-grid */}
         <div className="flex-1 order-2 lg:order-1 flex flex-col justify-center">
           <SectionHeading
