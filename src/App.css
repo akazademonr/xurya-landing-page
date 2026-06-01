@@ -19,6 +19,19 @@
 
 .hero {
   position: relative;
+  /* Added structural containment to keep skewed animations from bleeding out */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 160px; 
+  width: 100%;
+  max-width: 100%;
+
+  /* Dynamic fluid scaling container rule for mobile 3D objects */
+  @media (max-width: 640px) {
+    transform: scale(0.85);
+    margin-bottom: -20px;
+  }
 
   .base,
   .framework,
@@ -67,6 +80,12 @@
   @media (max-width: 1024px) {
     padding: 32px 20px 24px;
     gap: 18px;
+  }
+  
+  /* Added: Prevent overflow on ultra-small viewports */
+  @media (max-width: 480px) {
+    padding: 24px 16px;
+    gap: 16px;
   }
 }
 
@@ -142,6 +161,7 @@
     justify-content: center;
 
     li {
+      /* Safe tablet grid distribution */
       flex: 1 1 calc(50% - 8px);
     }
 
@@ -149,6 +169,17 @@
       width: 100%;
       justify-content: center;
       box-sizing: border-box;
+    }
+  }
+
+  /* Fixed: Drop columns down to a single-stack rows layout on smartphone widths */
+  @media (max-width: 640px) {
+    flex-direction: column;
+    width: 100%;
+    
+    li {
+      flex: 1 1 100%;
+      width: 100%;
     }
   }
 }

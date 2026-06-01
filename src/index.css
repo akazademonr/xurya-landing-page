@@ -18,6 +18,7 @@ body {
   font-family: var(--font-primary);
 }
 
+/* --- Core Keyframe Sequences --- */
 @keyframes progress {
   from { width: 0%; }
   to   { width: 100%; }
@@ -26,4 +27,22 @@ body {
 @keyframes fillLine {
   from { width: 0%; }
   to   { width: 100%; }
+}
+
+/* --- Functional Animation Utility Classes --- */
+
+/* 
+  Matches your 4000ms TestimonialCard duration state exactly.
+  Apply this class directly to your active tab loader element!
+*/
+.animate-progress-active {
+  animation: progress 4000ms linear forwards;
+}
+
+/* 
+  A smooth global loading indicator variation 
+  with ease-in-out pacing for decorative accent lines.
+*/
+.animate-fill-line {
+  animation: fillLine 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }

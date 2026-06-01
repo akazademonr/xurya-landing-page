@@ -7,11 +7,12 @@ interface SectionHeadingProps {
   className?: string;
 }
 
+// Fixed: Swapped static fonts for fluid, responsive utility scales
 const sizes = {
-  sm: "text-2xl",
-  md: "text-3xl",
-  lg: "text-4xl",
-  xl: "text-5xl",
+  sm: "text-xl sm:text-2xl",
+  md: "text-2xl sm:text-3xl",
+  lg: "text-3xl sm:text-4xl",
+  xl: "text-3xl sm:text-4xl md:text-5xl",
 };
 
 export default function SectionHeading({
@@ -24,11 +25,12 @@ export default function SectionHeading({
 }: SectionHeadingProps) {
   return (
     <h2
-      className={`font-semibold leading-tight ${sizes[size]} ${className}`}
+      className={`font-semibold leading-[1.15] tracking-tight ${sizes[size]} ${className}`}
       style={{ fontFamily: "Manrope, sans-serif" }}
     >
-      <span className={primaryColor}>{primaryText} </span>
-      <span className={secondaryColor}>{secondaryText}</span>
+      {/* Added block configuration controls on tiny mobile configurations if needed */}
+      <span className={`${primaryColor} inline-block`}>{primaryText} </span>{" "}
+      <span className={`${secondaryColor} inline-block`}>{secondaryText}</span>
     </h2>
   );
 }

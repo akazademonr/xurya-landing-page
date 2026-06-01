@@ -3,11 +3,13 @@ import styled from 'styled-components';
 interface HeroButtonProps {
   label?: string;
   onClick?: () => void;
+  className?: string; // Accept incoming Tailwind layouts from parents
 }
 
-const HeroButton = ({ label = "Get in touch", onClick }: HeroButtonProps) => {
+const HeroButton = ({ label = "Get in touch", onClick, className }: HeroButtonProps) => {
   return (
-    <StyledWrapper onClick={onClick}>
+    // Pass className to the wrapper so Tailwind can control button width/flex states
+    <StyledWrapper onClick={onClick} className={className}>
       <button>
         <div className="text">
           {label.split(" ").map((word, i) => (
@@ -19,7 +21,7 @@ const HeroButton = ({ label = "Get in touch", onClick }: HeroButtonProps) => {
             <span key={i}>{word}</span>
           ))}
         </div>
-        <svg strokeWidth={2} stroke="currentColor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="20px">
+        <svg strokeWidth={2} stroke="currentColor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M14 5l7 7m0 0l-7 7m7-7H3" strokeLinejoin="round" strokeLinecap="round" />
         </svg>
       </button>
@@ -28,8 +30,15 @@ const HeroButton = ({ label = "Get in touch", onClick }: HeroButtonProps) => {
 }
 
 const StyledWrapper = styled.div`
-  button {
+  /* Allow the component to scale full-width if the parent asks for it */
+  width: 100%;
+  
+  @media (min-width: 640px) {
     width: auto;
+  }
+
+  button {
+    width: 100%;
     min-width: 200px;
     height: 56px;
     overflow: hidden;
@@ -37,16 +46,25 @@ const StyledWrapper = styled.div`
     color: #fff;
     background: none;
     position: relative;
-    padding-bottom: 2em;
     cursor: pointer;
+    
+    /* Changed: layout centered via flex instead of absolute baseline shifts */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 48px 0 24px; 
   }
-  button > div,
-  button > svg {
+
+  button > div {
     position: absolute;
-    width: 100%;
+    left: 24px; /* Hard align text container baseline */
+    right: 48px;
     height: 100%;
     display: flex;
+    align-items: center;
+    justify-content: flex-start;
   }
+
   button:before {
     content: "";
     position: absolute;
@@ -66,12 +84,20 @@ const StyledWrapper = styled.div`
   button .clone > *,
   button .text > * {
     opacity: 1;
-    font-size: 1.3rem;
+    font-size: 1.1rem; /* Slightly balanced text footprint for mobile display sizes */
     transition: 0.2s;
-    margin-left: 4px;
+    margin-right: 4px;
   }
+  
+  @media (min-width: 768px) {
+    button .clone > *,
+    button .text > * {
+      font-size: 1.3rem;
+    }
+  }
+
   button .clone > * {
-    transform: translateY(60px);
+    transform: translateY(40px);
   }
   button:hover .clone > * {
     opacity: 1;
@@ -80,18 +106,21 @@ const StyledWrapper = styled.div`
   }
   button:hover .text > * {
     opacity: 1;
-    transform: translateY(-60px);
+    transform: translateY(-40px);
     transition: all 0.2s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
   }
-  button:hover .clone > :nth-child(1) { transition-delay: 0.15s; }
-  button:hover .clone > :nth-child(2) { transition-delay: 0.2s; }
-  button:hover .clone > :nth-child(3) { transition-delay: 0.25s; }
-  button:hover .clone > :nth-child(4) { transition-delay: 0.3s; }
+  button:hover .clone > :nth-child(1) { transition-delay: 0.05s; }
+  button:hover .clone > :nth-child(2) { transition-delay: 0.1s; }
+  button:hover .clone > :nth-child(3) { transition-delay: 0.15s; }
+  button:hover .clone > :nth-child(4) { transition-delay: 0.2s; }
+  
   button svg {
-    width: 20px;
-    right: 45px;
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    right: 24px; /* Keeps the arrow securely locked inside layout borders */
     top: 50%;
-    transform: translateY(-50%) rotate(-50deg);
+    transform: translateY(-50%) rotate(-40deg);
     transition: 0.2s ease-out;
   }
   button:hover svg {

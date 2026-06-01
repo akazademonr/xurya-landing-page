@@ -51,27 +51,31 @@ export default function FeaturesGrid({
   features = defaultFeatures,
 }: FeaturesGridProps) {
   return (
-    <section className="px-30 py-16" w-full style={{ fontFamily: "Manrope, sans-serif" }}>
+    // Fixed: Adjusted horizontal padding to be fluid across viewport states
+    <section className="px-6 sm:px-12 lg:px-16 py-16 w-full max-w-7xl mx-auto" style={{ fontFamily: "Manrope, sans-serif" }}>
 
-      {/* Heading */}
-      <h2 className="text-center text-4xl w-[500px] font-semibold leading-tight mb-12 mx-auto">
+      {/* Heading: Replaced fixed width with a safe max-width container rule */}
+      <h2 className="text-center text-2xl sm:text-3xl lg:text-4xl max-w-lg font-semibold leading-tight mb-12 mx-auto">
         <span className="text-gray-900">{primaryText} </span>
         <span className="text-gray-400">{secondaryText}</span>
       </h2>
 
-      {/* Grid */}
-      <div className="grid grid-cols-3 border border-gray-200 rounded-2xl overflow-hidden bg-white">
+      {/* Grid: Shifted to a single-column layout on mobile, transitioning up to 3 columns on desktop */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border border-gray-200 rounded-2xl overflow-hidden bg-white">
         {features.map((feature, index) => (
           <div
             key={index}
             className={`
-              p-8 flex flex-col gap-6
-              ${index % 3 !== 2 ? "border-r border-gray-200" : ""}
-              ${index < 3 ? "border-b border-gray-200" : ""}
+              p-6 sm:p-8 flex flex-col gap-6
+              border-b border-gray-200 last:border-b-0
+              md:[&:nth-child(odd)]:border-r md:[&:nth-child(even)]:border-r-0 lg:[&:nth-child(even)]:border-r
+              lg:[&:nth-child(3n)]:border-r-0
+              ${index >= features.length - 1 ? "lg:border-b-0" : ""}
+              ${index >= features.length - 2 ? "md:max-lg:border-b-0" : ""}
             `}
           >
             {/* Icon box */}
-            <div className="w-12 h-12 bg-white shadow-md rounded-xl flex items-center justify-center">
+            <div className="w-12 h-12 bg-white shadow-md rounded-xl flex items-center justify-center shrink-0">
               {feature.icon}
             </div>
 
