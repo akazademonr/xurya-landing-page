@@ -1,86 +1,74 @@
 import { useState } from "react";
-import Button from "./Button";
-import Logo from "./Logo";
+// Import your custom reusable Button component
+import Button from "./Button"; 
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-white text-black p-4 relative z-50">
-      <div className="container mx-auto">
-        <div className="flex justify-between items-center">
-          {/* Logo Area */}
-          <Logo />
-
-          {/* Hamburger Menu Button (Visible ONLY on Mobile/Tablet) */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1.5 focus:outline-none cursor-pointer"
-            aria-label="Toggle Menu"
-          >
-            <span
-              className={`block w-6 h-0.5 bg-black transition-transform duration-300 ${
-                isOpen ? "transform rotate-45 translate-y-2" : ""
-              }`}
-            ></span>
-            <span
-              className={`block w-6 h-0.5 bg-black transition-opacity duration-300 ${
-                isOpen ? "opacity-0" : "opacity-100"
-              }`}
-            ></span>
-            <span
-              className={`block w-6 h-0.5 bg-black transition-transform duration-300 ${
-                isOpen ? "transform -rotate-45 -translate-y-2" : ""
-              }`}
-            ></span>
-          </button>
-
-          {/* Desktop Navigation Links (Hidden on Mobile, flex on Desktop) */}
-          <div
-            className="hidden md:flex space-x-8 text-[17px] font-semibold"
-            style={{ fontFamily: "Manrope, sans-serif" }}
-          >
-            <a href="#" className="hover:text-gray-500 transition-colors">Home</a>
-            <a href="#" className="hover:text-gray-500 transition-colors">About Us</a>
-            <a href="#" className="hover:text-gray-500 transition-colors">Features</a>
-            <a href="#" className="hover:text-gray-500 transition-colors">Services</a>
-            <a href="#" className="hover:text-gray-500 transition-colors">Contact</a>
-          </div>
-
-          {/* Desktop Call to Actions (Hidden on Mobile) */}
-          <div
-            className="hidden md:flex gap-3"
-            style={{ fontFamily: "Manrope, sans-serif" }}
-          >
-            <Button label="Log in" variant="outline" className="border-gray-300 cursor-pointer" />
-            <Button label="Get in touch" className="bg-green-500 border-green-500 text-white hover:bg-green-600 cursor-pointer" />
-          </div>
+    <nav className="fixed top-0 left-0 right-0 w-full z-999 bg-white/90 backdrop-blur-md border-b border-gray-100 transition-all duration-300">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 h-20 flex items-center justify-between">
+        
+        {/* Brand Logo */}
+        <div className="text-xl font-bold text-gray-900 tracking-tight">
+          Xurya<span className="text-green-500">.</span>
         </div>
+
+        {/* Desktop Links */}
+        <div className="hidden md:flex items-center gap-8 text-sm font-semibold text-gray-600">
+          <a href="#home" className="hover:text-green-500 transition-colors duration-200">Home</a>
+          <a href="#about" className="hover:text-green-500 transition-colors duration-200">About Us</a>
+          <a href="#features" className="hover:text-green-500 transition-colors duration-200">Features</a>
+          <a href="#services" className="hover:text-green-500 transition-colors duration-200">Services</a>
+          <a href="#contact" className="hover:text-green-500 transition-colors duration-200">Contact</a>
+        </div>
+
+        {/* Desktop CTA Button */}
+        <div className="hidden md:flex items-center">
+          <a href="#contact" className="inline-block">
+            <Button 
+              label="Get in touch" 
+              className="bg-green-500 border-green-500 text-white hover:bg-green-600 hover:border-green-600 font-semibold cursor-pointer"
+            />
+          </a>
+        </div>
+
+        {/* Mobile Hamburger Trigger */}
+        <button 
+          onClick={() => setIsOpen(!isOpen)}
+          className="md:hidden p-2 text-gray-600 hover:text-gray-900 focus:outline-none"
+          aria-label="Toggle Menu"
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            {isOpen ? (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            ) : (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            )}
+          </svg>
+        </button>
       </div>
 
-      {/* Mobile Sliding Dropdown Drawer */}
-      <div
-        className={`absolute top-full left-0 w-full bg-white border-b border-gray-100 shadow-lg p-6 md:hidden flex flex-col gap-6 transition-all duration-300 ease-in-out ${
-          isOpen ? "opacity-100 translate-y-0 visible" : "opacity-0 -translate-y-4 invisible pointer-events-none"
+      {/* Animated Mobile Dropdown Panel */}
+      <div 
+        className={`md:hidden bg-white border-b border-gray-100 px-4 space-y-3 shadow-lg absolute w-full left-0 transition-all duration-500 ease-in-out overflow-hidden ${
+          isOpen 
+            ? "max-h-85 opacity-100 pt-2 pb-6 visible" 
+            : "max-h-0 opacity-0 pt-0 pb-0 invisible pointer-events-none"
         }`}
-        style={{ fontFamily: "Manrope, sans-serif" }}
       >
-        {/* Mobile Links */}
-        <div className="flex flex-col space-y-4 text-lg font-semibold">
-          <a href="#" onClick={() => setIsOpen(false)} className="hover:text-green-500 transition-colors">Home</a>
-          <a href="#" onClick={() => setIsOpen(false)} className="hover:text-green-500 transition-colors">About Us</a>
-          <a href="#" onClick={() => setIsOpen(false)} className="hover:text-green-500 transition-colors">Features</a>
-          <a href="#" onClick={() => setIsOpen(false)} className="hover:text-green-500 transition-colors">Services</a>
-          <a href="#" onClick={() => setIsOpen(false)} className="hover:text-green-500 transition-colors">Contact</a>
-        </div>
-
-        {/* Divider line in drawer */}
-        <div className="h-px bg-gray-200 w-full" />
-
-        {/* Mobile CTA Buttons */}
-        <div className="flex flex-col gap-3 w-full">
-          <Button label="Log in" variant="outline" className="border-gray-300 w-full justify-center cursor-pointer" />
-          <Button label="Get in touch" className="bg-green-500 border-green-500 text-white hover:bg-green-600 w-full justify-center cursor-pointer" />
+        <a href="#home" onClick={() => setIsOpen(false)} className="block text-sm font-semibold text-gray-600 hover:text-green-500 py-2">Home</a>
+        <a href="#about" onClick={() => setIsOpen(false)} className="block text-sm font-semibold text-gray-600 hover:text-green-500 py-2">About Us</a>
+        <a href="#features" onClick={() => setIsOpen(false)} className="block text-sm font-semibold text-gray-600 hover:text-green-500 py-2">Features</a>
+        <a href="#services" onClick={() => setIsOpen(false)} className="block text-sm font-semibold text-gray-600 hover:text-green-500 py-2">Services</a>
+        <a href="#contact" onClick={() => setIsOpen(false)} className="block text-sm font-semibold text-gray-600 hover:text-green-500 py-2">Contact</a>
+        <div className="pt-2">
+          <a href="#contact" onClick={() => setIsOpen(false)} className="block">
+            <Button 
+              label="Get in touch" 
+              className="w-full bg-green-500 border-green-500 text-white text-center font-semibold cursor-pointer"
+            />
+          </a>
         </div>
       </div>
     </nav>

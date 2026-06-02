@@ -46,3 +46,25 @@ body {
 .animate-fill-line {
   animation: fillLine 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
+
+/* Core configurations for Lenis smooth-scrolling layer */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis-smooth [data-lenis-prevent] {
+  scroll-behavior: contain;
+}
+
+.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis-scrolling iframe {
+  pointer-events: none;
+}

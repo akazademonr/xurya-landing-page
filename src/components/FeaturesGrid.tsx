@@ -1,97 +1,117 @@
-import { Layers, CheckCircle, MessageCircle, BookOpen, Package, Bot } from "lucide-react";
+import ScrollReveal from "./ScrollReveal";
 
-interface Feature {
-  icon: React.ReactNode;
+interface FeatureCardProps {
+  number: string;
   title: string;
   description: string;
+  className?: string;
 }
 
-interface FeaturesGridProps {
-  primaryText?: string;
-  secondaryText?: string;
-  features?: Feature[];
-}
-
-const defaultFeatures: Feature[] = [
-  {
-    icon: <Layers size={24} className="text-green-500" />,
-    title: "Layered security",
-    description: "With layered security, we ensure the safety of every unit we provide.",
-  },
-  {
-    icon: <CheckCircle size={24} className="text-green-500" />,
-    title: "Quality control of each part",
-    description: "Every unit you send is checked carefully for every detail.",
-  },
-  {
-    icon: <MessageCircle size={24} className="text-green-500" />,
-    title: "Reliable customer service",
-    description: "Our customer service is available 24 hours a week, with qualified people.",
-  },
-  {
-    icon: <BookOpen size={24} className="text-green-500" />,
-    title: "Maintenance manual book",
-    description: "We provide a guidebook that can be used to ensure maximum care.",
-  },
-  {
-    icon: <Package size={24} className="text-green-500" />,
-    title: "Delivered safely",
-    description: "Every unit we send arrives safely and quickly, without any obstacles or drama.",
-  },
-  {
-    icon: <Bot size={24} className="text-green-500" />,
-    title: "Based on artificial intelligence",
-    description: "You can control and view each unit from your phone, it's very easy to use.",
-  },
-];
-
-export default function FeaturesGrid({
-  primaryText = "We offer quality,",
-  secondaryText = "with the best materials and service",
-  features = defaultFeatures,
-}: FeaturesGridProps) {
+function FeatureCard({ number, title, description, className = "" }: FeatureCardProps) {
   return (
-    // Fixed: Adjusted horizontal padding to be fluid across viewport states
-    <section className="px-6 sm:px-12 lg:px-16 py-16 w-full max-w-7xl mx-auto" style={{ fontFamily: "Manrope, sans-serif" }}>
-
-      {/* Heading: Replaced fixed width with a safe max-width container rule */}
-      <h2 className="text-center text-2xl sm:text-3xl lg:text-4xl max-w-lg font-semibold leading-tight mb-12 mx-auto">
-        <span className="text-gray-900">{primaryText} </span>
-        <span className="text-gray-400">{secondaryText}</span>
-      </h2>
-
-      {/* Grid: Shifted to a single-column layout on mobile, transitioning up to 3 columns on desktop */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border border-gray-200 rounded-2xl overflow-hidden bg-white">
-        {features.map((feature, index) => (
-          <div
-            key={index}
-            className={`
-              p-6 sm:p-8 flex flex-col gap-6
-              border-b border-gray-200 last:border-b-0
-              md:[&:nth-child(odd)]:border-r md:[&:nth-child(even)]:border-r-0 lg:[&:nth-child(even)]:border-r
-              lg:[&:nth-child(3n)]:border-r-0
-              ${index >= features.length - 1 ? "lg:border-b-0" : ""}
-              ${index >= features.length - 2 ? "md:max-lg:border-b-0" : ""}
-            `}
-          >
-            {/* Icon box */}
-            <div className="w-12 h-12 bg-white shadow-md rounded-xl flex items-center justify-center shrink-0">
-              {feature.icon}
-            </div>
-
-            {/* Text */}
-            <div>
-              <h3 className="text-gray-900 font-semibold text-lg mb-2 line-clamp-2">
-                {feature.title}
-              </h3>
-              <p className="text-gray-400 text-sm leading-relaxed line-clamp-2">
-                {feature.description}
-              </p>
-            </div>
-          </div>
-        ))}
+    <div 
+      className={`p-6 sm:p-8 flex flex-col gap-3 bg-white transition-all duration-300 hover:bg-gray-50/50 group h-full ${className}`}
+    >
+      <div className="text-xs sm:text-sm font-semibold text-green-500 tracking-wider">
+        {number}
       </div>
+      <h3 className="text-lg sm:text-xl font-bold text-gray-900 group-hover:text-green-600 transition-colors duration-200">
+        {title}
+      </h3>
+      <p className="text-gray-600 text-xs sm:text-sm leading-relaxed font-medium">
+        {description}
+      </p>
+    </div>
+  );
+}
 
+export default function FeaturesGrid() {
+  const corporateFeatures = [
+    {
+      number: "01",
+      title: "Renewable Evaluation",
+      description: "Our technical engineers execute full-scale spatial assessments, mapping structural shading and peak solar irradiance patterns to guarantee optimal performance metrics."
+    },
+    {
+      number: "02",
+      title: "Hardware Procurement",
+      description: "We source strictly tier-1 components and high-efficiency photovoltaic systems directly from certified global manufacturers to secure multi-decade structural lifespans."
+    },
+    {
+      number: "03",
+      title: "Smart Grid Interface",
+      description: "Integrating intelligent telemetry meters and load balancing systems to dynamically switch between storage arrays and direct commercial consumption paths."
+    },
+    {
+      number: "04",
+      title: "Regulatory Compliance",
+      description: "Our compliance desks manage full state and local permitting tracks, grid-interconnection approvals, and net-metering legal frameworks seamlessly."
+    },
+    {
+      number: "05",
+      title: "Performance Guarantees",
+      description: "Eliminate asset risk profiles. Enjoy maximum continuous energy generation thresholds backed entirely by active system maintenance protocols and structural insurance plans."
+    },
+    {
+      number: "06",
+      title: "Asset Diagnostics",
+      description: "Continuous real-time optimization using proprietary IoT sensory grids, dispatching proactive field units long before thermal or output anomalies affect your baseline."
+    }
+  ];
+
+  return (
+    <section 
+      className="w-full bg-white py-16 lg:py-24"
+      style={{ fontFamily: "Manrope, sans-serif" }}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16">
+        
+        {/* Outer Bounding Frame: Handles the border wrapper cleanly without cutting off right-side edges */}
+        <div className="border border-gray-100 rounded-2xl bg-gray-100">
+          
+          {/* Inner Grid Layer: Gap handles lines between cards smoothly */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px">
+            {corporateFeatures.map((feature, idx) => {
+              // Construct sharp clean corner-matching variables
+              let cornerClasses = "";
+              
+              // Top-Left (Card 01)
+              if (idx === 0) cornerClasses += " rounded-tl-2xl";
+              
+              // Top-Right Handles (Changes depending on layout columns per viewpoint)
+              if (idx === 0) cornerClasses += " max-md:rounded-tr-2xl";
+              if (idx === 1) cornerClasses += " md:max-lg:rounded-tr-2xl";
+              if (idx === 2) cornerClasses += " lg:rounded-tr-2xl";
+              
+              // Bottom-Left Handles
+              if (idx === 5) cornerClasses += " max-md:rounded-bl-2xl";
+              if (idx === 4) cornerClasses += " md:max-lg:rounded-bl-2xl";
+              if (idx === 3) cornerClasses += " lg:rounded-bl-2xl";
+              
+              // Bottom-Right (Card 06)
+              if (idx === 5) cornerClasses += " rounded-br-2xl";
+
+              return (
+                <ScrollReveal 
+                  key={feature.number} 
+                  variant="fade-up" 
+                  delay={idx * 50}
+                  className="h-full"
+                >
+                  <FeatureCard
+                    number={feature.number}
+                    title={feature.title}
+                    description={feature.description}
+                    className={cornerClasses}
+                  />
+                </ScrollReveal>
+              );
+            })}
+          </div>
+
+        </div>
+
+      </div>
     </section>
   );
 }
