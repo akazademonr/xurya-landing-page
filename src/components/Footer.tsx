@@ -99,7 +99,7 @@ export default function Footer() {
       {/* Bottom Legal section */}
       <div className="flex flex-col-reverse sm:flex-row justify-between items-center px-6 sm:px-12 lg:px-16 py-6 gap-4 max-w-7xl mx-auto">
         <p className="text-gray-500 text-xs sm:text-sm text-center sm:text-left">
-          © 2026 Xurya Inc. All rights reserved
+          © 2026 Xurya Inc. All rights reserved - Built by Timi_can_build
         </p>
         <div className="flex justify-center gap-6">
           <a href="#" className="text-gray-500 text-xs sm:text-sm hover:text-white transition">Terms of Service</a>
